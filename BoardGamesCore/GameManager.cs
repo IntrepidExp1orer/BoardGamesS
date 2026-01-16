@@ -8,13 +8,13 @@ namespace BoardGamesCore
 {
     public class GameManager
     {
-        private readonly List<Player> players = new List<Player>();
-        public IReadOnlyList<Player> Players => players;
+        public List<Player> players { get; } = new List<Player>();
 
-        public void AddPlayer(string name)
+        public bool AddPlayer(string name)
         {
-            if (string.IsNullOrWhiteSpace(name)) return;
+            if (string.IsNullOrWhiteSpace(name) || players.Any(p => p.name == name)) return false;
             players.Add(new Player(name));
+            return true;
         }
 
         public void RemovePlayer(Player player)

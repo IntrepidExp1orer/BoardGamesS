@@ -31,7 +31,7 @@
             button1 = new Button();
             button2 = new Button();
             button3 = new Button();
-            button4 = new Button();
+            buttonStats = new Button();
             button5 = new Button();
             buttonAddPlayer = new Button();
             textBoxAddPlayer = new TextBox();
@@ -69,14 +69,15 @@
             button3.Text = "button3";
             button3.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // buttonStats
             // 
-            button4.Location = new Point(616, 248);
-            button4.Name = "button4";
-            button4.Size = new Size(130, 43);
-            button4.TabIndex = 3;
-            button4.Text = "button4";
-            button4.UseVisualStyleBackColor = true;
+            buttonStats.Location = new Point(616, 248);
+            buttonStats.Name = "buttonStats";
+            buttonStats.Size = new Size(130, 43);
+            buttonStats.TabIndex = 3;
+            buttonStats.Text = "Статистика";
+            buttonStats.UseVisualStyleBackColor = true;
+            buttonStats.Click += buttonStats_Click;
             // 
             // button5
             // 
@@ -153,7 +154,7 @@
             Controls.Add(textBoxAddPlayer);
             Controls.Add(buttonAddPlayer);
             Controls.Add(button5);
-            Controls.Add(button4);
+            Controls.Add(buttonStats);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
@@ -169,7 +170,7 @@
         private Button button1;
         private Button button2;
         private Button button3;
-        private Button button4;
+        private Button buttonStats;
         private Button button5;
         private Button buttonAddPlayer;
         private TextBox textBoxAddPlayer;
