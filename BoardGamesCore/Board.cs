@@ -1,0 +1,41 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace BoardGamesCore
+{
+    public class Board
+    {
+        private int rows;
+        private int columns;
+        private readonly Cell[,] grid;
+
+        public Board(int row, int column)
+        {
+            rows = row;
+            columns = column;
+            grid = new Cell[rows, columns];
+
+            for (int r = 0; r < rows; r++)
+            {
+                for (int c = 0; c < columns; c++)
+                {
+                    grid[r, c] = new Cell();
+                }
+            }
+        }
+
+
+        public int GetValue(int row, int column)
+        {
+            if (row < 0 || row >= rows) return 0;
+            else if (column < 0 || column >= columns) return 0;
+            else return grid[row, column].value;
+        }
+
+
+    }
+}

@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
+            buttonYahtzee = new Button();
             button2 = new Button();
             button3 = new Button();
             buttonStats = new Button();
-            button5 = new Button();
+            buttonExit = new Button();
             buttonAddPlayer = new Button();
             textBoxAddPlayer = new TextBox();
             dataGridViewPlayers = new DataGridView();
@@ -42,14 +42,15 @@
             ((System.ComponentModel.ISupportInitialize)dataGridViewPlayers).BeginInit();
             SuspendLayout();
             // 
-            // button1
+            // buttonYahtzee
             // 
-            button1.Location = new Point(437, 96);
-            button1.Name = "button1";
-            button1.Size = new Size(130, 43);
-            button1.TabIndex = 0;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            buttonYahtzee.Location = new Point(437, 96);
+            buttonYahtzee.Name = "buttonYahtzee";
+            buttonYahtzee.Size = new Size(130, 43);
+            buttonYahtzee.TabIndex = 0;
+            buttonYahtzee.Text = "Yahtzee";
+            buttonYahtzee.UseVisualStyleBackColor = true;
+            buttonYahtzee.Click += buttonYahtzee_Click;
             // 
             // button2
             // 
@@ -79,14 +80,14 @@
             buttonStats.UseVisualStyleBackColor = true;
             buttonStats.Click += buttonStats_Click;
             // 
-            // button5
+            // buttonExit
             // 
-            button5.Location = new Point(616, 337);
-            button5.Name = "button5";
-            button5.Size = new Size(130, 43);
-            button5.TabIndex = 4;
-            button5.Text = "button5";
-            button5.UseVisualStyleBackColor = true;
+            buttonExit.Location = new Point(616, 337);
+            buttonExit.Name = "buttonExit";
+            buttonExit.Size = new Size(130, 43);
+            buttonExit.TabIndex = 4;
+            buttonExit.Text = "Выход";
+            buttonExit.UseVisualStyleBackColor = true;
             // 
             // buttonAddPlayer
             // 
@@ -153,11 +154,11 @@
             Controls.Add(dataGridViewPlayers);
             Controls.Add(textBoxAddPlayer);
             Controls.Add(buttonAddPlayer);
-            Controls.Add(button5);
+            Controls.Add(buttonExit);
             Controls.Add(buttonStats);
             Controls.Add(button3);
             Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(buttonYahtzee);
             Name = "Form1";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)dataGridViewPlayers).EndInit();
@@ -167,11 +168,11 @@
 
         #endregion
 
-        private Button button1;
+        private Button buttonYahtzee;
         private Button button2;
         private Button button3;
         private Button buttonStats;
-        private Button button5;
+        private Button buttonExit;
         private Button buttonAddPlayer;
         private TextBox textBoxAddPlayer;
         private DataGridView dataGridViewPlayers;

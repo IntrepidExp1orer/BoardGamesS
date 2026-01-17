@@ -43,8 +43,18 @@ namespace BoardGamesWinForms
 
         private void buttonStats_Click(object sender, EventArgs e)
         {
+            this.Hide();
             var stats = new Stats(manager, controller.players);
             stats.ShowDialog();
+            this.Show();
+        }
+
+        private void buttonYahtzee_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var yacht = new Yahtzee();
+            yacht.ShowDialog();
+            this.Show();
         }
     }
 }
