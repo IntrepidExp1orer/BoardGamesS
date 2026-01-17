@@ -34,9 +34,9 @@
             diceElement4 = new DiceElement();
             diceElement5 = new DiceElement();
             buttonRoll = new Button();
-            dataGridView1 = new DataGridView();
+            dataGridViewScore = new DataGridView();
             buttonStart = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewScore).BeginInit();
             SuspendLayout();
             // 
             // diceElement1
@@ -90,16 +90,17 @@
             buttonRoll.UseVisualStyleBackColor = true;
             buttonRoll.Click += buttonRoll_Click;
             // 
-            // dataGridView1
+            // dataGridViewScore
             // 
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.AllowUserToDeleteRows = false;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(120, 39);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.ReadOnly = true;
-            dataGridView1.Size = new Size(549, 248);
-            dataGridView1.TabIndex = 6;
+            dataGridViewScore.AllowUserToAddRows = false;
+            dataGridViewScore.AllowUserToDeleteRows = false;
+            dataGridViewScore.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewScore.Location = new Point(120, 39);
+            dataGridViewScore.Name = "dataGridViewScore";
+            dataGridViewScore.ReadOnly = true;
+            dataGridViewScore.Size = new Size(549, 248);
+            dataGridViewScore.TabIndex = 6;
+            dataGridViewScore.CellClick += dataGridViewScore_CellClick;
             // 
             // buttonStart
             // 
@@ -118,7 +119,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(buttonStart);
-            Controls.Add(dataGridView1);
+            Controls.Add(dataGridViewScore);
             Controls.Add(buttonRoll);
             Controls.Add(diceElement5);
             Controls.Add(diceElement4);
@@ -127,7 +128,7 @@
             Controls.Add(diceElement1);
             Name = "Yahtzee";
             Text = "Yahtzee";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewScore).EndInit();
             ResumeLayout(false);
         }
 
@@ -139,7 +140,7 @@
         private DiceElement diceElement4;
         private DiceElement diceElement5;
         private Button buttonRoll;
-        private DataGridView dataGridView1;
+        private DataGridView dataGridViewScore;
         private Button buttonStart;
     }
 }

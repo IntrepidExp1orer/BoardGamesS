@@ -36,6 +36,14 @@ namespace BoardGamesCore
             else return grid[row, column].value;
         }
 
-
+        public void SetValue(int row, int column, int score)
+        {
+            if (row < 0 || row >= rows)
+            if (column < 0 || column >= columns)
+                {
+                    grid[row, column].value = score;
+                }
+            
+        }
     }
 }

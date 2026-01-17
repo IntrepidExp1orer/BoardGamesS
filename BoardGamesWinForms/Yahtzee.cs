@@ -24,7 +24,28 @@ namespace BoardGamesWinForms
         {
             controller.StartYahtzeeGame();
             buttonRoll.Enabled = true;
+            InitializeScoreTable();
         }
+
+        private void InitializeScoreTable()
+        {
+            dataGridViewScore.Rows.Clear();
+            dataGridViewScore.Columns.Clear();
+
+            dataGridViewScore.Columns.Add("Hands", "Hands");
+
+            var game = controller.currentGame as YahtzeeGame;
+            for (int i = 0; i < game.Players.Count; i++)
+            {
+                dataGridViewScore.Columns.Add($"Player{i}", game.Players[i].name);
+            }
+
+            foreach (var hand in YahtzeeGame.HandsOrder)
+            {
+                dataGridViewScore.Rows.Add(hand.ToString());
+            }
+        }
+
 
         private void buttonRoll_Click(object sender, EventArgs e)
         {
@@ -36,9 +57,9 @@ namespace BoardGamesWinForms
                 if (!diceControls[i].IsLocked) toRoll[i] = true;
             }
 
-            var yahtzee = controller.currentGame as YahtzeeGame;
-            yahtzee.RollDice(toRoll);
-            int[] values = yahtzee.dice.values;
+            var game = controller.currentGame as YahtzeeGame;
+            game.RollDice(toRoll);
+            int[] values = game.dice.values;
 
             for (int i = 0; i < diceControls.Count; i++)
             {
@@ -46,5 +67,28 @@ namespace BoardGamesWinForms
             }
         }
 
+
+        public void dataGridViewScore_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var game = controller.currentGame as YahtzeeGame;
+
+            // Временный функционал
+
+            if (e.RowIndex > 1 || e.ColumnIndex > 1)
+            {
+                int value = game.ChooseHand(e.RowIndex);
+                var cell = dataGridViewScore.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+                if (cell.Value == null || string.IsNullOrWhiteSpace(cell.Value.ToString()))
+                {
+                    cell.Value = value;
+                    cell.ReadOnly = true;
+                    cell.Style.BackColor = Color.ForestGreen;
+                    
+                }
+            }
+
+
+        }
     }
 }
