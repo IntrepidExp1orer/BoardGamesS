@@ -21,7 +21,7 @@ namespace BoardGamesCore
             this.currentGame = "Unnamed Game";
         }
 
-        public abstract void Start();
+        //public abstract void Start();
 
         public List<Player> GetPlayerList()
         {

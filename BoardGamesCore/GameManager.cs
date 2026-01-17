@@ -9,6 +9,7 @@ namespace BoardGamesCore
     public class GameManager
     {
         public List<Player> players { get; } = new List<Player>();
+        public Game currentGame { get; private set; }
 
         public bool AddPlayer(string name)
         {
@@ -22,9 +23,9 @@ namespace BoardGamesCore
             players.Remove(player);
         }
 
-        public void StartGame()
+        public void StartYahtzeeGame()
         {
-
+            currentGame = new YahtzeeGame(players);
         }
     }
 }

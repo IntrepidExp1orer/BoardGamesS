@@ -52,7 +52,7 @@ namespace BoardGamesWinForms
         private void buttonYahtzee_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var yacht = new Yahtzee();
+            var yacht = new Yahtzee(controller);
             yacht.ShowDialog();
             this.Show();
         }
