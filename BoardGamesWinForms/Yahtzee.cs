@@ -44,6 +44,11 @@ namespace BoardGamesWinForms
             {
                 dataGridViewScore.Rows.Add(hand.ToString());
             }
+
+            foreach (DataGridViewColumn column in dataGridViewScore.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
         }
 
 
@@ -74,7 +79,7 @@ namespace BoardGamesWinForms
 
             // Временный функционал
 
-            if (e.RowIndex > 1 || e.ColumnIndex > 1)
+            if (e.RowIndex >= 0 && e.ColumnIndex > 0)
             {
                 int value = game.ChooseHand(e.RowIndex);
                 var cell = dataGridViewScore.Rows[e.RowIndex].Cells[e.ColumnIndex];
