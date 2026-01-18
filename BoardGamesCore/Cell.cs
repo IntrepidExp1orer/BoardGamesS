@@ -9,6 +9,7 @@ namespace BoardGamesCore
     public class Cell
     {
         public int value { get; set; }
+        public bool empty { get; set; } = true;
 
         public Cell(int value = 0)
         {

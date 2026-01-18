@@ -3,11 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace BoardGamesWinForms
 {
@@ -26,6 +29,7 @@ namespace BoardGamesWinForms
             buttonRoll.Enabled = true;
             InitializeScoreTable();
             buttonStart.Visible = false;
+            UpdateActiveColumn();
         }
 
         private void InitializeScoreTable()
@@ -45,6 +49,8 @@ namespace BoardGamesWinForms
             {
                 dataGridViewScore.Rows.Add(hand.ToString());
             }
+
+            dataGridViewScore.Rows.Add("Total");
 
             foreach (DataGridViewColumn column in dataGridViewScore.Columns)
             {
@@ -74,6 +80,7 @@ namespace BoardGamesWinForms
             }
 
             buttonRoll.Text = $"Roll ({game.rolls}/3)";
+            ScorePreview();
         }
 
 
@@ -87,15 +94,20 @@ namespace BoardGamesWinForms
                 if (e.RowIndex >= 0 && e.ColumnIndex > 0)
                     if (e.ColumnIndex == game.currentPlayer + 1)
                     {
-                        int value = game.ChooseHand(e.RowIndex);
-                        var cell = dataGridViewScore.Rows[e.RowIndex].Cells[e.ColumnIndex];
 
-                        if (cell.Value == null || string.IsNullOrWhiteSpace(cell.Value.ToString()))
+                        if (game.IsHandAvailable(e.RowIndex, game.currentPlayer))
                         {
+                            ClearPreview();
+                            int value = game.ChooseHand(e.RowIndex);
+                            var cell = dataGridViewScore.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                            UpdateActiveColumn();
+
                             cell.Value = value;
                             cell.ReadOnly = true;
                             cell.Style.BackColor = Color.ForestGreen;
                             buttonRoll.Text = "Roll (3/3)";
+
+                            dataGridViewScore.Rows[YahtzeeGame.Hands].Cells[e.ColumnIndex].Value = game.GetSum(e.ColumnIndex - 1);
 
                             var diceControls = new List<DiceElement> { diceElement1, diceElement2, diceElement3, diceElement4, diceElement5 };
                             foreach (DiceElement dice in diceControls)
@@ -104,6 +116,54 @@ namespace BoardGamesWinForms
                             }
                         }
                     }
+        }
+
+        // Отображение возможных очков в таблице
+        private void ScorePreview()
+        {
+            var game = controller.currentGame as YahtzeeGame;
+            var scores = game.GetAvailableScores();
+
+            foreach (var pair in scores)
+            {
+                int row = pair.Key;
+                var score = pair.Value;
+
+                var cell = dataGridViewScore.Rows[row].Cells[game.currentPlayer + 1];
+
+                if (!cell.ReadOnly)
+                {
+                    cell.Value = score;
+                }
+            }
+        }
+
+        private void ClearPreview()
+        {
+            var game = controller.currentGame as YahtzeeGame;
+
+            for (int i = 0; i < YahtzeeGame.Hands;  i++)
+            {
+                var cell = dataGridViewScore.Rows[i].Cells[game.currentPlayer + 1];
+
+                if (!cell.ReadOnly)
+                {
+                    cell.Value = null;
+                }
+            }
+        }
+
+        private void UpdateActiveColumn()
+        {
+            var game = controller.currentGame as YahtzeeGame;
+
+            for (int c = 1; c < dataGridViewScore.Columns.Count; c++)
+            {
+                bool active = (c == game.currentPlayer + 1);
+
+                dataGridViewScore.Columns[c].DefaultCellStyle.BackColor =
+                    active ? Color.LightYellow : Color.LightGray;
+            }
         }
 
     }

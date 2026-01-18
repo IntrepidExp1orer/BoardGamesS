@@ -102,10 +102,10 @@
             dataGridViewScore.AllowUserToResizeColumns = false;
             dataGridViewScore.AllowUserToResizeRows = false;
             dataGridViewScore.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewScore.EditMode = DataGridViewEditMode.EditProgrammatically;
             dataGridViewScore.Location = new Point(120, 39);
             dataGridViewScore.MultiSelect = false;
             dataGridViewScore.Name = "dataGridViewScore";
-            dataGridViewScore.ReadOnly = true;
             dataGridViewScore.RowHeadersVisible = false;
             dataGridViewScore.ShowEditingIcon = false;
             dataGridViewScore.Size = new Size(549, 248);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace BoardGamesCore
 
         public enum YahtzeeHand
         {
-            Ones,
+            Aces,
             Twos,
             Threes,
             Fours,
@@ -29,7 +30,7 @@ namespace BoardGamesCore
 
         public static readonly YahtzeeHand[] HandsOrder =
         {
-            YahtzeeHand.Ones,
+            YahtzeeHand.Aces,
             YahtzeeHand.Twos,
             YahtzeeHand.Threes,
             YahtzeeHand.Fours,
@@ -83,7 +84,7 @@ namespace BoardGamesCore
 
             for (int i = 0; i < Hands; i++)
             {
-                if (board.GetValue(i, currentPlayer) == 0)
+                if (board.IsEmpty(i, currentPlayer))
                 {
                     var hand = HandsOrder[i];
                     result[i] = CalculateScore(hand);
@@ -99,10 +100,20 @@ namespace BoardGamesCore
             int score = CalculateScore(hand);
 
             board.SetValue(row, currentPlayer, score);
+            board.CoulumnSum(currentPlayer);
 
             AdvanceTurn();
             return score;
         }
 
+        public bool IsHandAvailable(int h, int player)
+        {
+            return board.IsEmpty(h, player);
+        }
+
+        public int GetSum(int c)
+        {
+            return board.CoulumnSum(c);
+        }
     }
 }

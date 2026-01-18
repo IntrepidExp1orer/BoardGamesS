@@ -38,12 +38,31 @@ namespace BoardGamesCore
 
         public void SetValue(int row, int column, int score)
         {
-            if (row < 0 || row >= rows)
-            if (column < 0 || column >= columns)
+            if (row >= 0 || row < rows)
+                if (column >= 0 || column < columns)
                 {
                     grid[row, column].value = score;
+                    grid[row, column].empty = false;
                 }
             
+        }
+
+        public bool IsEmpty(int row, int column)
+        {
+            return grid[row, column].empty;
+        }
+
+        public int CoulumnSum(int column)
+        {
+            int sum = 0;
+
+            for (int row = 0; row < rows - 1; row++)
+            {
+                sum += grid[row, column].value;
+            }
+
+            grid[rows - 1, column].value = sum;
+            return sum;
         }
     }
 }
