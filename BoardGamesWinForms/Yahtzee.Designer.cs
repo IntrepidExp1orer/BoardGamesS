@@ -41,6 +41,7 @@
             // 
             // diceElement1
             // 
+            diceElement1.Enabled = false;
             diceElement1.IsLocked = false;
             diceElement1.Location = new Point(120, 308);
             diceElement1.Name = "diceElement1";
@@ -49,6 +50,7 @@
             // 
             // diceElement2
             // 
+            diceElement2.Enabled = false;
             diceElement2.IsLocked = false;
             diceElement2.Location = new Point(241, 308);
             diceElement2.Name = "diceElement2";
@@ -57,6 +59,7 @@
             // 
             // diceElement3
             // 
+            diceElement3.Enabled = false;
             diceElement3.IsLocked = false;
             diceElement3.Location = new Point(359, 308);
             diceElement3.Name = "diceElement3";
@@ -65,6 +68,7 @@
             // 
             // diceElement4
             // 
+            diceElement4.Enabled = false;
             diceElement4.IsLocked = false;
             diceElement4.Location = new Point(476, 308);
             diceElement4.Name = "diceElement4";
@@ -73,6 +77,7 @@
             // 
             // diceElement5
             // 
+            diceElement5.Enabled = false;
             diceElement5.IsLocked = false;
             diceElement5.Location = new Point(605, 308);
             diceElement5.Name = "diceElement5";
@@ -86,7 +91,7 @@
             buttonRoll.Name = "buttonRoll";
             buttonRoll.Size = new Size(101, 40);
             buttonRoll.TabIndex = 5;
-            buttonRoll.Text = "Roll";
+            buttonRoll.Text = "Roll (3/3)";
             buttonRoll.UseVisualStyleBackColor = true;
             buttonRoll.Click += buttonRoll_Click;
             // 

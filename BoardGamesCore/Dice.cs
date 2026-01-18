@@ -46,5 +46,10 @@ namespace BoardGamesCore
         {
             return values.Sum();
         }
+
+        public void Reset()
+        {
+            
+        }
     }
 }

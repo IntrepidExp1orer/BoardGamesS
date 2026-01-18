@@ -35,5 +35,14 @@ namespace BoardGamesWinForms
             this.BackColor = IsLocked ? Color.Gold : Color.Transparent;
             this.Padding = IsLocked ? new Padding(3) : new Padding(0);
         }
+
+        public void Reset()
+        {
+            SetValue(1);
+            IsLocked = false;
+            this.BackColor = Color.Transparent;
+            this.Padding = new Padding(0);
+            this.Enabled = false;
+        }
     }
 }

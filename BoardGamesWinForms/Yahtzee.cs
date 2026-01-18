@@ -25,6 +25,7 @@ namespace BoardGamesWinForms
             controller.StartYahtzeeGame();
             buttonRoll.Enabled = true;
             InitializeScoreTable();
+            buttonStart.Visible = false;
         }
 
         private void InitializeScoreTable()
@@ -60,6 +61,7 @@ namespace BoardGamesWinForms
             for (int i = 0; i < diceControls.Count; i++)
             {
                 if (!diceControls[i].IsLocked) toRoll[i] = true;
+                diceControls[i].Enabled = true;
             }
 
             var game = controller.currentGame as YahtzeeGame;
@@ -70,6 +72,8 @@ namespace BoardGamesWinForms
             {
                 diceControls[i].SetValue(values[i]);
             }
+
+            buttonRoll.Text = $"Roll ({game.rolls}/3)";
         }
 
 
@@ -79,21 +83,28 @@ namespace BoardGamesWinForms
 
             // Временный функционал
 
-            if (e.RowIndex >= 0 && e.ColumnIndex > 0)
-            {
-                int value = game.ChooseHand(e.RowIndex);
-                var cell = dataGridViewScore.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            if (game.rolls < 3)
+                if (e.RowIndex >= 0 && e.ColumnIndex > 0)
+                    if (e.ColumnIndex == game.currentPlayer + 1)
+                    {
+                        int value = game.ChooseHand(e.RowIndex);
+                        var cell = dataGridViewScore.Rows[e.RowIndex].Cells[e.ColumnIndex];
 
-                if (cell.Value == null || string.IsNullOrWhiteSpace(cell.Value.ToString()))
-                {
-                    cell.Value = value;
-                    cell.ReadOnly = true;
-                    cell.Style.BackColor = Color.ForestGreen;
-                    
-                }
-            }
+                        if (cell.Value == null || string.IsNullOrWhiteSpace(cell.Value.ToString()))
+                        {
+                            cell.Value = value;
+                            cell.ReadOnly = true;
+                            cell.Style.BackColor = Color.ForestGreen;
+                            buttonRoll.Text = "Roll (3/3)";
 
-
+                            var diceControls = new List<DiceElement> { diceElement1, diceElement2, diceElement3, diceElement4, diceElement5 };
+                            foreach (DiceElement dice in diceControls)
+                            {
+                                dice.Reset();
+                            }
+                        }
+                    }
         }
+
     }
 }

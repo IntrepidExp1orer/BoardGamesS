@@ -10,7 +10,8 @@ namespace BoardGamesCore
     {
         public const int Hands = 6;
         private int currentHand = 0;
-        private int currentPlayer = 0;
+        public int rolls { get; private set; } = 3;
+        public int currentPlayer { get; private set; } = 0;
 
         private readonly Board board;
         public Dice dice { get; } = new Dice();
@@ -45,7 +46,11 @@ namespace BoardGamesCore
 
         public void RollDice(bool[] hold)
         {
-            dice.RollSelected(hold);
+            if (rolls > 0)
+            { 
+                dice.RollSelected(hold);
+                rolls--;
+            }
         }
 
         public void ScoreHand()
@@ -55,7 +60,9 @@ namespace BoardGamesCore
 
         private void AdvanceTurn()
         {
-         currentPlayer = (currentPlayer + 1) % players.Count;   
+            currentPlayer = (currentPlayer + 1) % players.Count;
+            rolls = 3;
+            dice.RollAll();
         }
 
 
@@ -96,5 +103,6 @@ namespace BoardGamesCore
             AdvanceTurn();
             return score;
         }
+
     }
 }
