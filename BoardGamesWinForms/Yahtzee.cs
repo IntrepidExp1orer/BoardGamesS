@@ -51,6 +51,10 @@ namespace BoardGamesWinForms
             }
 
             dataGridViewScore.Rows.Add("Total");
+            for (int i = 0; i < game.Players.Count; i++)
+            {
+                dataGridViewScore.Rows[YahtzeeGame.Hands].Cells[i + 1].Style.BackColor = Color.ForestGreen;
+            }
 
             foreach (DataGridViewColumn column in dataGridViewScore.Columns)
             {
@@ -113,6 +117,16 @@ namespace BoardGamesWinForms
                             foreach (DiceElement dice in diceControls)
                             {
                                 dice.Reset();
+                            }
+
+
+                            if (game.IsGameFinished())
+                            {
+                                int winner = game.GetWinner();
+
+                                MessageBox.Show($"Победил {game.Players[winner].name}!", "Игра окончена", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                                buttonRoll.Enabled = false;
                             }
                         }
                     }

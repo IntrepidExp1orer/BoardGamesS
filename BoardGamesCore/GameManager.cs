@@ -18,9 +18,9 @@ namespace BoardGamesCore
             return true;
         }
 
-        public void RemovePlayer(Player player)
+        public void RemovePlayer(int player)
         {
-            players.Remove(player);
+            players.RemoveAt(player);
         }
 
         public void StartYahtzeeGame()

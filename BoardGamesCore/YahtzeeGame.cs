@@ -102,7 +102,10 @@ namespace BoardGamesCore
             board.SetValue(row, currentPlayer, score);
             board.CoulumnSum(currentPlayer);
 
-            AdvanceTurn();
+            if (!IsGameFinished())
+            { 
+                AdvanceTurn(); 
+            }
             return score;
         }
 
@@ -115,5 +118,41 @@ namespace BoardGamesCore
         {
             return board.CoulumnSum(c);
         }
+
+
+        public bool IsGameFinished()
+        {
+            for (int p = 0; p < players.Count; p++)
+            {
+                for (int h = 0; h < Hands; h++)
+                {
+                    if (board.IsEmpty(h, p))
+                        return false;
+                }
+            }
+            return true;
+        }
+
+
+        public int GetWinner()
+        {
+            int max = -1;
+            int winner = -1;
+
+            for (int p = 0; p < players.Count; p++)
+            {
+                int score = board.GetValue(Hands, p);
+                if (score > max)
+                {
+                    max = score;
+                    winner = p;
+                }
+            }
+
+            players[winner].AddWin();
+
+            return winner;
+        }
+
     }
 }

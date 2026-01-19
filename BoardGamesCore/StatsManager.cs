@@ -9,7 +9,7 @@ namespace BoardGamesCore
     public class StatsManager
     {
         private readonly string filename;
-        private List<Player> allPlayers = new List<Player>();
+        public List<Player> allPlayers { get; } = new List<Player>();
 
         public StatsManager(string filename)
         {
@@ -84,7 +84,7 @@ namespace BoardGamesCore
                 {
                     if (saved.name == current.name)
                     {
-                        saved.winCount += current.winCount;
+                        
                         break;
                     }
                 }

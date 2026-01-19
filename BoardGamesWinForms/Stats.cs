@@ -20,12 +20,12 @@ namespace BoardGamesWinForms
             InitializeComponent();
             this.manager = manager;
             LoadStats(currentPlayers);
-            this.manager.SaveStats(currentPlayers);
+            //this.manager.SaveStats(currentPlayers);
         }
 
         private void LoadStats(List<Player> currentPlayers)
         {
-            List<Player> allPlayers = manager.LoadStats(currentPlayers);
+            List<Player> allPlayers = manager.allPlayers;
 
             dataGridViewStats.DataSource = null;
             dataGridViewStats.DataSource = allPlayers.Select(s => new

@@ -9,6 +9,7 @@ namespace BoardGamesWinForms
         public Form1()
         {
             InitializeComponent();
+            manager.LoadStats(controller.players);
         }
 
         private void buttonAddPlayer_Click(object sender, EventArgs e)
@@ -28,12 +29,16 @@ namespace BoardGamesWinForms
             dataGridViewPlayers.DataSource = null;
             dataGridViewPlayers.DataSource = controller.players.Select(p => new { name = p.name, winCount = p.winCount }).ToList();
 
+            manager.LoadStats(controller.players);
+            manager.SaveStats(controller.players);
         }
 
         private void buttonRemoveUser_Click(object sender, EventArgs e)
         {
-            if (dataGridViewPlayers.CurrentRow != null)
+            if (dataGridViewPlayers.SelectedRows.Count != 0)
             {
+                controller.RemovePlayer(dataGridViewPlayers.SelectedRows[0].Index);
+                RefreshPlayers();
             }
             else
             {
@@ -55,6 +60,7 @@ namespace BoardGamesWinForms
             var yacht = new Yahtzee(controller);
             yacht.ShowDialog();
             this.Show();
+            RefreshPlayers();
         }
     }
 }

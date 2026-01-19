@@ -116,8 +116,10 @@
             dataGridViewPlayers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewPlayers.Columns.AddRange(new DataGridViewColumn[] { columnName, ColumnSessionWins });
             dataGridViewPlayers.Location = new Point(45, 96);
+            dataGridViewPlayers.MultiSelect = false;
             dataGridViewPlayers.Name = "dataGridViewPlayers";
             dataGridViewPlayers.ReadOnly = true;
+            dataGridViewPlayers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewPlayers.Size = new Size(247, 150);
             dataGridViewPlayers.TabIndex = 7;
             // 
