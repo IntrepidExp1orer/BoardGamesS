@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -52,6 +53,8 @@ namespace BoardGamesCore
             return grid[row, column].empty;
         }
 
+
+        // Yahtzee-specific
         public int CoulumnSum(int column)
         {
             int sum = 0;
@@ -63,6 +66,22 @@ namespace BoardGamesCore
 
             grid[rows - 1, column].value = sum;
             return sum;
+        }
+
+        public int YahtzeeBonus(int column)
+        {
+            int sum = 0;
+            for (int row = 0; row < 6; row++)
+            {
+                sum += grid[row, column].value;
+            }
+
+            return sum;
+        }
+
+        public void AddTotal(int column, int value)
+        {
+            grid[rows - 1, column].value += value;
         }
     }
 }

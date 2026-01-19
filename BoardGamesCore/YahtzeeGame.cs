@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,12 +13,15 @@ namespace BoardGamesCore
     {
         public const int Hands = 13;
         private int currentHand = 0;
+        private bool[] bonuses;
+        private bool[] yahtzees;
         public int rolls { get; private set; } = 3;
         public int currentPlayer { get; private set; } = 0;
 
         private readonly Board board;
         public Dice dice { get; } = new Dice();
 
+        
 
         public enum YahtzeeHand
         {
@@ -60,6 +64,8 @@ namespace BoardGamesCore
         public YahtzeeGame(List<Player> players) : base(players)
         {
             board = new Board(Hands + 1, players.Count);
+            bonuses = new bool[players.Count];
+            yahtzees = new bool[players.Count];
         }
 
         public void RollDice(bool[] hold)
@@ -101,8 +107,7 @@ namespace BoardGamesCore
             return false;
         }
 
-        // Игровой процесс
-        
+
 
         public int CalculateScore(YahtzeeHand hand)
         {
@@ -116,7 +121,7 @@ namespace BoardGamesCore
                 case YahtzeeHand.Fours:
                 case YahtzeeHand.Fives:
                 case YahtzeeHand.Sixes:
-                    int face = (int)hand + 1;
+                    int face = (int)hand + 1;                   
                     return dice.values.Where(val => val == face).Sum();
                 case YahtzeeHand.ThreeOfKind:
                     if (groups.Any(c => c.Value >= 3)) return dice.values.Sum();
@@ -134,7 +139,11 @@ namespace BoardGamesCore
                     if (StraightScore(5)) return 40;
                     else return 0;
                 case YahtzeeHand.Yahtzee:
-                    if (groups.Any(c => c.Value >= 5)) return 50;
+                    if (groups.Any(c => c.Value == 5)) 
+                    {
+                        yahtzees[currentPlayer] = true;
+                        return 50; 
+                    }
                     else return 0;
                 case YahtzeeHand.Chance:
                     return dice.values.Sum();
@@ -167,6 +176,19 @@ namespace BoardGamesCore
 
             board.SetValue(row, currentPlayer, score);
             board.CoulumnSum(currentPlayer);
+
+            // Бонусные очки
+            if (!bonuses[currentPlayer] && board.YahtzeeBonus(currentPlayer) >= 63)
+            {
+                bonuses[currentPlayer] = true;
+                board.AddTotal(currentPlayer, 35);
+            }
+
+            if (dice.values.All(v => v == dice.values[0]) && yahtzees[currentPlayer])
+            {
+                board.AddTotal(currentPlayer, 100);
+            }
+
 
             if (!IsGameFinished())
             { 
