@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace BoardGamesCore
 {
     public class YahtzeeGame : Game
     {
-        public const int Hands = 6;
+        public const int Hands = 13;
         private int currentHand = 0;
         public int rolls { get; private set; } = 3;
         public int currentPlayer { get; private set; } = 0;
@@ -25,7 +26,15 @@ namespace BoardGamesCore
             Threes,
             Fours,
             Fives,
-            Sixes
+            Sixes,
+
+            ThreeOfKind,
+            FourOfKind,
+            FullHouse,
+            SmallStraight,
+            LargeStraight,
+            Yahtzee,
+            Chance
         }
 
         public static readonly YahtzeeHand[] HandsOrder =
@@ -35,7 +44,15 @@ namespace BoardGamesCore
             YahtzeeHand.Threes,
             YahtzeeHand.Fours,
             YahtzeeHand.Fives,
-            YahtzeeHand.Sixes
+            YahtzeeHand.Sixes,
+
+            YahtzeeHand.ThreeOfKind,
+            YahtzeeHand.FourOfKind,
+            YahtzeeHand.FullHouse,
+            YahtzeeHand.SmallStraight,
+            YahtzeeHand.LargeStraight,
+            YahtzeeHand.Yahtzee,
+            YahtzeeHand.Chance
         };
 
 
@@ -54,9 +71,9 @@ namespace BoardGamesCore
             }
         }
 
-        public void ScoreHand()
+        public Dictionary<int, int> GroupValues()
         {
-
+            return dice.values.GroupBy(v => v).ToDictionary(g => g.Key, g => g.Count());
         }
 
         private void AdvanceTurn()
@@ -66,15 +83,64 @@ namespace BoardGamesCore
             dice.RollAll();
         }
 
+        private bool StraightScore(int length)
+        {
+            int[] sortedDice = dice.values.Distinct().Order().ToArray();
+            int sequence = 1;
 
+            for (int i = 1; i < sortedDice.Length; i++)
+            {
+                if (sortedDice[i] == sortedDice[i - 1] + 1)
+                {
+                    sequence++;
+                    if (sequence >= length) return true;
+                }
+                else sequence = 1;
+            }
+
+            return false;
+        }
 
         // Игровой процесс
         
 
         public int CalculateScore(YahtzeeHand hand)
         {
-            int face = (int)hand + 1;
-            return dice.values.Where(val => val == face).Sum();
+            var groups = GroupValues();
+
+            switch(hand)
+            {
+                case YahtzeeHand.Aces:
+                case YahtzeeHand.Twos:
+                case YahtzeeHand.Threes:
+                case YahtzeeHand.Fours:
+                case YahtzeeHand.Fives:
+                case YahtzeeHand.Sixes:
+                    int face = (int)hand + 1;
+                    return dice.values.Where(val => val == face).Sum();
+                case YahtzeeHand.ThreeOfKind:
+                    if (groups.Any(c => c.Value >= 3)) return dice.values.Sum();
+                    else return 0;
+                case YahtzeeHand.FourOfKind:
+                    if (groups.Any(c => c.Value >= 4)) return dice.values.Sum();
+                    else return 0;
+                case YahtzeeHand.FullHouse:
+                    if (groups.Any(c => c.Value == 3) && groups.Any(c => c.Value == 2)) return 25;
+                    else return 0;
+                case YahtzeeHand.SmallStraight:
+                    if (StraightScore(4)) return 30;
+                    else return 0;
+                case YahtzeeHand.LargeStraight:
+                    if (StraightScore(5)) return 40;
+                    else return 0;
+                case YahtzeeHand.Yahtzee:
+                    if (groups.Any(c => c.Value >= 5)) return 50;
+                    else return 0;
+                case YahtzeeHand.Chance:
+                    return dice.values.Sum();
+                default:
+                    return 0;
+            }
         }
 
 
