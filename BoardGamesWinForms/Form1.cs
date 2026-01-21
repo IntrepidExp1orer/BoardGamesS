@@ -56,11 +56,34 @@ namespace BoardGamesWinForms
 
         private void buttonYahtzee_Click(object sender, EventArgs e)
         {
+            if (controller.players.Count > 0)
+            {
             this.Hide();
             var yacht = new Yahtzee(controller);
             yacht.ShowDialog();
             this.Show();
             RefreshPlayers();
+            }
+            else
+            {
+                MessageBox.Show("Невозможно начать без игроков.");
+            }
+        }
+
+        private void buttonMancala_Click(object sender, EventArgs e)
+        {
+            if (controller.players.Count == 2)
+            {
+            this.Hide();
+            var manc = new Mancala(controller);
+            manc.ShowDialog();
+            this.Show();
+            RefreshPlayers();
+            }
+            else
+            {
+                MessageBox.Show("Для игры нужно 2 игрока");
+            }
         }
     }
 }

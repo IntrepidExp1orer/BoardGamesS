@@ -16,9 +16,8 @@ namespace BoardGamesCore
         private bool[] bonuses;
         private bool[] yahtzees;
         public int rolls { get; private set; } = 3;
-        public int currentPlayer { get; private set; } = 0;
 
-        private readonly Board board;
+        private readonly BoardYahtzee board;
         public Dice dice { get; } = new Dice();
 
         
@@ -63,7 +62,7 @@ namespace BoardGamesCore
 
         public YahtzeeGame(List<Player> players) : base(players)
         {
-            board = new Board(Hands + 1, players.Count);
+            board = new BoardYahtzee(Hands + 1, players.Count);
             bonuses = new bool[players.Count];
             yahtzees = new bool[players.Count];
         }
