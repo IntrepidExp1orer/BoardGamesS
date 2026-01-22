@@ -24,6 +24,8 @@ namespace BoardGamesCore
         }
 
         //public abstract void Start();
+        public abstract bool IsGameFinished();
+        public abstract int GetWinner();
 
         public List<Player> GetPlayerList()
         {

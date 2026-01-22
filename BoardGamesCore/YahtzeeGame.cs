@@ -207,7 +207,7 @@ namespace BoardGamesCore
         }
 
 
-        public bool IsGameFinished()
+        override public bool IsGameFinished()
         {
             for (int p = 0; p < players.Count; p++)
             {
@@ -221,7 +221,7 @@ namespace BoardGamesCore
         }
 
 
-        public int GetWinner()
+        override public int GetWinner()
         {
             int max = -1;
             int winner = -1;

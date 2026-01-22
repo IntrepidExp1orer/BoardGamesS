@@ -16,7 +16,7 @@ namespace BoardGamesCore
 
         public MancalaGame(List<Player> currentPlayers) : base(currentPlayers)
         {
-            board = new BoardMancala(2, 6);
+            board = new BoardMancala(2, 7);
         }
 
 
@@ -55,6 +55,69 @@ namespace BoardGamesCore
 
                 stones--;
             }
+
+
+            // Переход хода если закончен не в доме
+            var lastPit = route[index];
+            if (!(lastPit.store && lastPit.player == currentPlayer))
+            {
+                currentPlayer = 1 - currentPlayer;
+            }
+        }
+
+
+        private void TryCapture(CellPos lastPos)
+        {
+            if (!lastPos.store && lastPos.row == currentPlayer)
+            {
+                // При завершении в пустой яме, перехват камней противника
+                int stones = board.GetValue(lastPos.row, lastPos.column);
+                if (stones == 1)
+                {
+                    int captured = board.GetValue(1 - lastPos.row, lastPos.column);
+
+                    if (captured > 0)
+                    {
+                        board.SetValue(1 - lastPos.row, lastPos.column, 0);
+                        board.SetValue(lastPos.row, lastPos.column, 0);
+
+                        board.StoreStones(currentPlayer, captured + stones);
+                    }
+                }
+            }
+        }
+
+        override public bool IsGameFinished()
+        {
+            bool side0Empty = Enumerable.Range(0, 6).All(c => board.GetValue(0, c) == 0);
+            bool side1Empty = Enumerable.Range(0, 6).All(c => board.GetValue(1, c) == 0);  
+
+            return side0Empty || side1Empty;
+        }
+
+        public void CollectRemaining()
+        {
+            for (int row = 0; row < 2; row++)
+            {
+                int sum = 0;
+                for (int col = 0; col < 6; col++)
+                {
+                    sum += board.GetValue(row, col);
+                    board.SetValue(row, col, 0);
+                }
+
+                board.StoreStones(row, sum);
+            }
+        }
+
+        override public int GetWinner()
+        {
+            int p0 = board.GetValue(0, 6);
+            int p1 = board.GetValue(1, 6);
+
+            if (p0 > p1) return 0;
+            if (p1 > p0) return 1;
+            return -1;
         }
     }
 }

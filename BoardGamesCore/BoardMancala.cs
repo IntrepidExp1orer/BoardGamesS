@@ -21,5 +21,10 @@ namespace BoardGamesCore
         {
             grid[row, column].value++;
         }
+
+        public void StoreStones(int player, int amount)
+        {
+            grid[player, 6].value += amount;
+        }
     }
 }
