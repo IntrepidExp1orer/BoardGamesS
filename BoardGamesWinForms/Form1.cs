@@ -72,18 +72,7 @@ namespace BoardGamesWinForms
 
         private void buttonMancala_Click(object sender, EventArgs e)
         {
-            if (controller.players.Count == 2)
-            {
-            this.Hide();
-            var manc = new Mancala(controller);
-            manc.ShowDialog();
-            this.Show();
-            RefreshPlayers();
-            }
-            else
-            {
-                MessageBox.Show("Для игры нужно 2 игрока");
-            }
+            
         }
     }
 }

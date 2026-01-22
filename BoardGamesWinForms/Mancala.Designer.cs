@@ -28,18 +28,56 @@
         /// </summary>
         private void InitializeComponent()
         {
+            tableLayoutPanel = new TableLayoutPanel();
+            buttonStart = new Button();
             SuspendLayout();
+            // 
+            // tableLayoutPanel
+            // 
+            tableLayoutPanel.BackColor = Color.BurlyWood;
+            tableLayoutPanel.ColumnCount = 7;
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 14.2857141F));
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 14.2857141F));
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 14.2857141F));
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 14.2857141F));
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 14.2857141F));
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 14.2857141F));
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 14.2857141F));
+            tableLayoutPanel.Location = new Point(100, 46);
+            tableLayoutPanel.Name = "tableLayoutPanel";
+            tableLayoutPanel.RowCount = 3;
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel.Size = new Size(594, 285);
+            tableLayoutPanel.TabIndex = 0;
+            // 
+            // buttonStart
+            // 
+            buttonStart.BackColor = Color.FromArgb(192, 255, 192);
+            buttonStart.Location = new Point(356, 357);
+            buttonStart.Name = "buttonStart";
+            buttonStart.Size = new Size(81, 69);
+            buttonStart.TabIndex = 8;
+            buttonStart.Text = "Начать";
+            buttonStart.UseVisualStyleBackColor = false;
+            buttonStart.Click += buttonStart_Click;
             // 
             // Mancala
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(buttonStart);
+            Controls.Add(tableLayoutPanel);
             Name = "Mancala";
             Text = "Mancala";
             ResumeLayout(false);
         }
 
         #endregion
+
+        private TableLayoutPanel tableLayoutPanel;
+        private Button buttonStart;
     }
 }

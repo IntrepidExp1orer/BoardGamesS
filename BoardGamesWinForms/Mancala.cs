@@ -13,11 +13,29 @@ namespace BoardGamesWinForms
 {
     public partial class Mancala : Form
     {
-        private readonly GameManager controller;
-        public Mancala(GameManager controller)
+        private readonly MancalaGame game;
+        private Dictionary<(int row, int col), MancalaPit> pits = new Dictionary<(int row, int col), MancalaPit>();
+
+        public Mancala(MancalaGame game)
         {
             InitializeComponent();
-            this.controller = controller;
+            this.game = game;
+        }
+
+        private void buttonStart_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void Initializeboard()
+        {
+            Controls.Add(tableLayoutPanel);
+        }
+
+        private void CreatePits()
+        {
+
         }
     }
 }
