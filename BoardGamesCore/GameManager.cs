@@ -27,5 +27,10 @@ namespace BoardGamesCore
         {
             currentGame = new YahtzeeGame(players);
         }
+
+        public void StartMancalaGame()
+        {
+            currentGame = new MancalaGame(players);
+        }
     }
 }

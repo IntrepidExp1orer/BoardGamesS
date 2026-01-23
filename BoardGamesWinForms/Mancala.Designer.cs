@@ -35,20 +35,21 @@
             // tableLayoutPanel
             // 
             tableLayoutPanel.BackColor = Color.BurlyWood;
-            tableLayoutPanel.ColumnCount = 7;
-            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 14.2857141F));
-            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 14.2857141F));
-            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 14.2857141F));
-            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 14.2857141F));
-            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 14.2857141F));
-            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 14.2857141F));
-            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 14.2857141F));
+            tableLayoutPanel.ColumnCount = 8;
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 12.49953F));
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 12.4995317F));
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 12.4995317F));
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 12.4995317F));
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 12.4995317F));
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 12.4995317F));
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 12.4995317F));
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 12.5032816F));
             tableLayoutPanel.Location = new Point(100, 46);
             tableLayoutPanel.Name = "tableLayoutPanel";
             tableLayoutPanel.RowCount = 3;
-            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 40F));
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 40F));
             tableLayoutPanel.Size = new Size(594, 285);
             tableLayoutPanel.TabIndex = 0;
             // 

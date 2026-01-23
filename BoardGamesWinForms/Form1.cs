@@ -58,11 +58,11 @@ namespace BoardGamesWinForms
         {
             if (controller.players.Count > 0)
             {
-            this.Hide();
-            var yacht = new Yahtzee(controller);
-            yacht.ShowDialog();
-            this.Show();
-            RefreshPlayers();
+                this.Hide();
+                var yacht = new Yahtzee(controller);
+                yacht.ShowDialog();
+                this.Show();
+                RefreshPlayers();
             }
             else
             {
@@ -72,7 +72,18 @@ namespace BoardGamesWinForms
 
         private void buttonMancala_Click(object sender, EventArgs e)
         {
-            
+            if (controller.players.Count == 2)
+            {
+                this.Hide();
+                var yacht = new Mancala(controller);
+                yacht.ShowDialog();
+                this.Show();
+                RefreshPlayers();
+            }
+            else
+            {
+                MessageBox.Show("Необходимо 2 игрока.");
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace BoardGamesCore
 {
     public class MancalaGame : Game
     {
-        private readonly BoardMancala board;
+        public readonly BoardMancala board;
         
         public record CellPos(int row, int column, bool store = false, int player = -1);
         private readonly List<CellPos> route;
@@ -17,6 +18,11 @@ namespace BoardGamesCore
         public MancalaGame(List<Player> currentPlayers) : base(currentPlayers)
         {
             board = new BoardMancala(2, 7);
+            route = BuildRoute();
+            foreach (var p in route)
+            {
+                Debug.WriteLine($"row={p.row}, col={p.column}, store={p.store}");
+            }
         }
 
 
@@ -30,17 +36,19 @@ namespace BoardGamesCore
             list.Add(new CellPos(0, 6, true, 0));
 
 
-            for (int col = 6 - 1; col >= 0; col--)
+            for (int col = 5; col >= 0; col--)
                 list.Add(new CellPos(1, col));
 
             list.Add(new CellPos(1, 6, true, 1));
+
 
             return list;
         }
 
 
-        public void MakeMove(int currentPlayer, int pit)
+        public void MakeMove(int pit)
         {
+            Debug.WriteLine($"START FROM row={currentPlayer} col={pit}");
             int stones = board.GetValue(currentPlayer, pit);
             board.SetValue(currentPlayer, pit, 0);
 
@@ -55,6 +63,8 @@ namespace BoardGamesCore
 
                 stones--;
             }
+
+            TryCapture(route[index]);
 
 
             // Переход хода если закончен не в доме
