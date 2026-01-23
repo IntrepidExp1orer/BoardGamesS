@@ -56,6 +56,7 @@
             // buttonStart
             // 
             buttonStart.BackColor = Color.FromArgb(192, 255, 192);
+            buttonStart.ForeColor = SystemColors.ControlText;
             buttonStart.Location = new Point(356, 357);
             buttonStart.Name = "buttonStart";
             buttonStart.Size = new Size(81, 69);

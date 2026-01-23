@@ -125,8 +125,16 @@ namespace BoardGamesCore
             int p0 = board.GetValue(0, 6);
             int p1 = board.GetValue(1, 6);
 
-            if (p0 > p1) return 0;
-            if (p1 > p0) return 1;
+            if (p0 > p1)
+            {
+                players[0].AddWin();
+                return 0;
+            }
+            if (p1 > p0) 
+            {
+                players[1].AddWin();
+                return 1; 
+            }
             return -1;
         }
     }

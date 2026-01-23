@@ -25,16 +25,17 @@ namespace BoardGamesWinForms
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            InitializeBoard();
-            CreatePits();
-            buttonStart.Visible = false;
             controller.StartMancalaGame();
+            InitializeBoard();
+            buttonStart.Visible = false;
         }
 
 
         private void InitializeBoard()
         {
             Controls.Add(tableLayoutPanel);
+            CreatePits();
+            UpdateHighlight();
         }
 
         private void CreatePits()
@@ -90,26 +91,20 @@ namespace BoardGamesWinForms
 
             if (pit.Row == game.currentPlayer && !pit.IsStore && pit.Stones > 0)
             {
-                Debug.WriteLine($"CLICK row={pit.Row} col={pit.Col}");
                 game.MakeMove(pit.Col);
-                for (int r = 0; r < 2; r++)
-                    for (int c = 0; c < 6; c++)
-                        Debug.WriteLine($"BOARD[{r},{c}]={game.board.GetValue(r, c)}");
                 RedrawBoard();
-                for (int r = 0; r < 2; r++)
-                    for (int c = 0; c < 6; c++)
-                        Debug.WriteLine($"BOARD[{r},{c}]={game.board.GetValue(r, c)}");
+
+                UpdateHighlight();
+
                 if (game.IsGameFinished())
                 {
                     game.CollectRemaining();
                     RedrawBoard();
                    
-
                     int winner = game.GetWinner();
                     MessageBox.Show(winner == -1 ? "Ничья" : $"Победил игрок {winner + 1}");
                 }
             }
-            Debug.WriteLine($"Текущий игрок: {game.currentPlayer}");
         }
 
         private void RedrawBoard()
@@ -120,6 +115,29 @@ namespace BoardGamesWinForms
             {
                 int value = game.board.GetValue(i.Key.row, i.Key.col);
                 i.Value.Stones = value;
+            }
+        }
+
+
+        private void UpdateHighlight()
+        {
+            var game = controller.currentGame as MancalaGame;
+
+            foreach (var i in pits)
+            {
+                var pit = i.Value;
+
+                if (pit.IsStore)
+                {
+                    pit.BackColor = pit.Row == game.currentPlayer? Color.DarkOliveGreen : Color.DarkKhaki;
+
+                    continue;
+                }
+
+                bool active = pit.Row == game.currentPlayer;
+
+                pit.Enabled = active;
+                pit.BackColor = active ? Color.LightBlue : Color.Bisque;
             }
         }
     }
