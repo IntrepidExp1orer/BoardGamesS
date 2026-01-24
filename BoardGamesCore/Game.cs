@@ -10,6 +10,7 @@ namespace BoardGamesCore
     {
         protected string currentGame;
         protected List<Player> players;
+        public int currentPlayer { get; protected set; } = 0;
 
         public string winner { get; protected set; }
         public int winPoints { get; protected set; }
@@ -23,6 +24,8 @@ namespace BoardGamesCore
         }
 
         //public abstract void Start();
+        public abstract bool IsGameFinished();
+        public abstract int GetWinner();
 
         public List<Player> GetPlayerList()
         {

@@ -152,5 +152,6 @@
         private Button buttonRoll;
         private DataGridView dataGridViewScore;
         private Button buttonStart;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

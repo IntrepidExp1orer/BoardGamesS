@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             buttonYahtzee = new Button();
-            button2 = new Button();
+            buttonMancala = new Button();
             button3 = new Button();
             buttonStats = new Button();
             buttonExit = new Button();
@@ -52,14 +52,15 @@
             buttonYahtzee.UseVisualStyleBackColor = true;
             buttonYahtzee.Click += buttonYahtzee_Click;
             // 
-            // button2
+            // buttonMancala
             // 
-            button2.Location = new Point(437, 171);
-            button2.Name = "button2";
-            button2.Size = new Size(130, 43);
-            button2.TabIndex = 1;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
+            buttonMancala.Location = new Point(437, 171);
+            buttonMancala.Name = "buttonMancala";
+            buttonMancala.Size = new Size(130, 43);
+            buttonMancala.TabIndex = 1;
+            buttonMancala.Text = "Манкала";
+            buttonMancala.UseVisualStyleBackColor = true;
+            buttonMancala.Click += buttonMancala_Click;
             // 
             // button3
             // 
@@ -159,7 +160,7 @@
             Controls.Add(buttonExit);
             Controls.Add(buttonStats);
             Controls.Add(button3);
-            Controls.Add(button2);
+            Controls.Add(buttonMancala);
             Controls.Add(buttonYahtzee);
             Name = "Form1";
             Text = "Form1";
@@ -171,7 +172,7 @@
         #endregion
 
         private Button buttonYahtzee;
-        private Button button2;
+        private Button buttonMancala;
         private Button button3;
         private Button buttonStats;
         private Button buttonExit;

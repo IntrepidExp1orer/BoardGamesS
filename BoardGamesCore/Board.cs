@@ -10,9 +10,9 @@ namespace BoardGamesCore
 {
     public class Board
     {
-        private int rows;
-        private int columns;
-        private readonly Cell[,] grid;
+        protected int rows;
+        protected int columns;
+        protected readonly Cell[,] grid;
 
         public Board(int row, int column)
         {
@@ -54,34 +54,5 @@ namespace BoardGamesCore
         }
 
 
-        // Yahtzee-specific
-        public int CoulumnSum(int column)
-        {
-            int sum = 0;
-
-            for (int row = 0; row < rows - 1; row++)
-            {
-                sum += grid[row, column].value;
-            }
-
-            grid[rows - 1, column].value = sum;
-            return sum;
-        }
-
-        public int YahtzeeBonus(int column)
-        {
-            int sum = 0;
-            for (int row = 0; row < 6; row++)
-            {
-                sum += grid[row, column].value;
-            }
-
-            return sum;
-        }
-
-        public void AddTotal(int column, int value)
-        {
-            grid[rows - 1, column].value += value;
-        }
     }
 }
