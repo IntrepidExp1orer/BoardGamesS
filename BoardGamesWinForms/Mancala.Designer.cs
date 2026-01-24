@@ -30,6 +30,8 @@
         {
             tableLayoutPanel = new TableLayoutPanel();
             buttonStart = new Button();
+            label1 = new Label();
+            label2 = new Label();
             SuspendLayout();
             // 
             // tableLayoutPanel
@@ -65,21 +67,44 @@
             buttonStart.UseVisualStyleBackColor = false;
             buttonStart.Click += buttonStart_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(100, 344);
+            label1.Name = "label1";
+            label1.Size = new Size(38, 15);
+            label1.TabIndex = 9;
+            label1.Text = "label1";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(656, 9);
+            label2.Name = "label2";
+            label2.Size = new Size(38, 15);
+            label2.TabIndex = 10;
+            label2.Text = "label2";
+            // 
             // Mancala
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label2);
+            Controls.Add(label1);
             Controls.Add(buttonStart);
             Controls.Add(tableLayoutPanel);
             Name = "Mancala";
             Text = "Mancala";
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private TableLayoutPanel tableLayoutPanel;
         private Button buttonStart;
+        private Label label1;
+        private Label label2;
     }
 }

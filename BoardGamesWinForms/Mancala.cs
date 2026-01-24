@@ -21,6 +21,8 @@ namespace BoardGamesWinForms
         {
             InitializeComponent();
             this.controller = controller;
+            label1.Text = controller.players[0].name;
+            label2.Text = controller.players[1].name;
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
@@ -68,8 +70,10 @@ namespace BoardGamesWinForms
             pits[(1, 6)] = store1;
             pits[(0, 6)] = store0;
 
-            tableLayoutPanel.Controls.Add(store1, 0, 1);
-            tableLayoutPanel.Controls.Add(store0, 7, 1);
+            tableLayoutPanel.Controls.Add(store1, 0, 0);
+            tableLayoutPanel.SetRowSpan(store1, 3);
+            tableLayoutPanel.Controls.Add(store0, 7, 0);
+            tableLayoutPanel.SetRowSpan(store0, 3);
 
             foreach (var kv in pits)
             {
@@ -80,7 +84,7 @@ namespace BoardGamesWinForms
             }
         }
 
-        private void Pit_Click(object? sender, EventArgs e)
+        private async void Pit_Click(object? sender, EventArgs e)
         {
             if (sender is not MancalaPit pit)
             {
@@ -91,7 +95,15 @@ namespace BoardGamesWinForms
 
             if (pit.Row == game.currentPlayer && !pit.IsStore && pit.Stones > 0)
             {
-                game.MakeMove(pit.Col);
+                foreach (var p in pits.Values) p.Enabled = false;
+
+
+                //game.MakeMove(pit.Col);
+                foreach (var step in game.MakeMoveSteps(pit.Col))
+                {           
+                    RedrawBoard();
+                    await Task.Delay(300);
+                }
                 RedrawBoard();
 
                 UpdateHighlight();
@@ -102,7 +114,7 @@ namespace BoardGamesWinForms
                     RedrawBoard();
                    
                     int winner = game.GetWinner();
-                    MessageBox.Show(winner == -1 ? "Ничья" : $"Победил игрок {winner + 1}");
+                    MessageBox.Show(winner == -1 ? "Ничья" : $"Победил игрок {controller.players[winner].name}");
                 }
             }
         }

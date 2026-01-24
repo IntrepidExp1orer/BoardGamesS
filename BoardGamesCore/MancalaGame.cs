@@ -75,6 +75,36 @@ namespace BoardGamesCore
             }
         }
 
+        public IEnumerable<CellPos> MakeMoveSteps(int pitCol)
+        {
+            int stones = board.GetValue(currentPlayer, pitCol);
+            board.SetValue(currentPlayer, pitCol, 0);
+
+            int index = route.FindIndex(p =>
+                p.row == currentPlayer &&
+                p.column == pitCol &&
+                !p.store);
+
+            while (stones > 0)
+            {
+                index = (index + 1) % route.Count;
+                var pos = route[index];
+
+                if (pos.store && pos.player != currentPlayer)
+                    continue;
+
+                board.AddStone(pos.row, pos.column);
+                stones--;
+
+                yield return pos;
+            }
+
+            var last = route[index];
+
+            if (!(last.store && last.player == currentPlayer))
+                currentPlayer = 1 - currentPlayer;
+        }
+
 
         private void TryCapture(CellPos lastPos)
         {
