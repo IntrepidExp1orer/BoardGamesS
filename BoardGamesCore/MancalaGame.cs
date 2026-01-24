@@ -99,6 +99,8 @@ namespace BoardGamesCore
                 yield return pos;
             }
 
+            TryCapture(route[index]);
+
             var last = route[index];
 
             if (!(last.store && last.player == currentPlayer))

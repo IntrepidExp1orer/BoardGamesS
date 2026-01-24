@@ -35,7 +35,7 @@ namespace BoardGamesWinForms
 
         private void InitializeBoard()
         {
-            Controls.Add(tableLayoutPanel);
+
             CreatePits();
             UpdateHighlight();
         }
