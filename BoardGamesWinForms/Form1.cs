@@ -85,5 +85,10 @@ namespace BoardGamesWinForms
                 MessageBox.Show("Необходимо 2 игрока.");
             }
         }
+
+        private void buttonExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

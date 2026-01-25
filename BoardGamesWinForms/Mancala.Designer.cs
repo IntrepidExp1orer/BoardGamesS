@@ -34,6 +34,7 @@
             label2 = new Label();
             tableLayoutPanel1 = new TableLayoutPanel();
             label3 = new Label();
+            buttonRules = new Button();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -105,6 +106,7 @@
             tableLayoutPanel1.Controls.Add(tableLayoutPanel, 1, 2);
             tableLayoutPanel1.Controls.Add(label2, 1, 1);
             tableLayoutPanel1.Controls.Add(label3, 1, 0);
+            tableLayoutPanel1.Controls.Add(buttonRules, 2, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -129,6 +131,22 @@
             label3.TabIndex = 11;
             label3.Text = "Mancala";
             // 
+            // buttonRules
+            // 
+            buttonRules.Anchor = AnchorStyles.None;
+            buttonRules.BackColor = Color.White;
+            buttonRules.Font = new Font("Cooper Black", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonRules.ForeColor = SystemColors.ActiveCaptionText;
+            buttonRules.Location = new Point(704, 10);
+            buttonRules.Name = "buttonRules";
+            buttonRules.Padding = new Padding(2);
+            buttonRules.Size = new Size(45, 45);
+            buttonRules.TabIndex = 14;
+            buttonRules.Text = "?";
+            buttonRules.UseVisualStyleBackColor = false;
+            buttonRules.Visible = false;
+            buttonRules.Click += buttonRules_Click;
+            // 
             // Mancala
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -151,5 +169,6 @@
         private Label label2;
         private TableLayoutPanel tableLayoutPanel1;
         private Label label3;
+        private Button buttonRules;
     }
 }

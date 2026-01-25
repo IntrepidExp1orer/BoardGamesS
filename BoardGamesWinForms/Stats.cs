@@ -27,11 +27,18 @@ namespace BoardGamesWinForms
         {
             List<Player> allPlayers = manager.allPlayers;
 
-            dataGridViewStats.DataSource = null;
-            dataGridViewStats.DataSource = allPlayers.Select(s => new
+            DataTable playerStats = new DataTable();
+            playerStats.Columns.Add("name", typeof(string));
+            playerStats.Columns.Add("totalWins", typeof(int));
+
+
+            foreach (var player in allPlayers)
             {
-                name = s.name, totalWins = s.winCount
-            }).ToList();
+                playerStats.Rows.Add(player.name, player.winCount);
+            }
+
+            dataGridViewStats.DataSource = null;
+            dataGridViewStats.DataSource = playerStats;
         }
     }
 }

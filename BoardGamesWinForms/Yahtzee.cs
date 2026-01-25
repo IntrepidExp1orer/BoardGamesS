@@ -30,6 +30,7 @@ namespace BoardGamesWinForms
             InitializeScoreTable();
             buttonStart.Visible = false;
             UpdateActiveColumn();
+            buttonRules.Visible = true;
         }
 
         private void InitializeScoreTable()
@@ -156,7 +157,7 @@ namespace BoardGamesWinForms
         {
             var game = controller.currentGame as YahtzeeGame;
 
-            for (int i = 0; i < YahtzeeGame.Hands;  i++)
+            for (int i = 0; i < YahtzeeGame.Hands; i++)
             {
                 var cell = dataGridViewScore.Rows[i].Cells[game.currentPlayer + 1];
 
@@ -180,5 +181,17 @@ namespace BoardGamesWinForms
             }
         }
 
+        private void buttonRules_Click(object sender, EventArgs e)
+        {
+            var game = controller.currentGame;
+            var rules = game.rules;
+
+            MessageBox.Show(
+                rules.Rules,
+                rules.Name,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
+        }
     }
 }

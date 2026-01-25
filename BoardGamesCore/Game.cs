@@ -15,7 +15,11 @@ namespace BoardGamesCore
         public string winner { get; protected set; }
         public int winPoints { get; protected set; }
 
+        public abstract IGameRules rules { get; }
+
+
         public IReadOnlyList<Player> Players => players;
+
 
         public Game(List<Player> currentPlayers)
         {

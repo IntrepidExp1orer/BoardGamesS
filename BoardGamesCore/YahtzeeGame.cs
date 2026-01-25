@@ -20,7 +20,8 @@ namespace BoardGamesCore
         private readonly BoardYahtzee board;
         public Dice dice { get; } = new Dice();
 
-        
+
+        public override IGameRules rules { get; } = new YahtzeeRules();
 
         public enum YahtzeeHand
         {

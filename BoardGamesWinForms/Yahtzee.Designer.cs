@@ -39,6 +39,7 @@
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel2 = new TableLayoutPanel();
             label3 = new Label();
+            buttonRules = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewScore).BeginInit();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
@@ -174,6 +175,7 @@
             tableLayoutPanel2.Controls.Add(buttonStart, 0, 2);
             tableLayoutPanel2.Controls.Add(buttonRoll, 1, 3);
             tableLayoutPanel2.Controls.Add(label3, 1, 0);
+            tableLayoutPanel2.Controls.Add(buttonRules, 2, 0);
             tableLayoutPanel2.Dock = DockStyle.Fill;
             tableLayoutPanel2.Location = new Point(0, 0);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -197,12 +199,29 @@
             label3.TabIndex = 12;
             label3.Text = "Yahtzee";
             // 
+            // buttonRules
+            // 
+            buttonRules.Anchor = AnchorStyles.None;
+            buttonRules.BackColor = Color.White;
+            buttonRules.Font = new Font("Cooper Black", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonRules.ForeColor = SystemColors.ActiveCaptionText;
+            buttonRules.Location = new Point(710, 6);
+            buttonRules.Name = "buttonRules";
+            buttonRules.Padding = new Padding(2);
+            buttonRules.Size = new Size(45, 45);
+            buttonRules.TabIndex = 13;
+            buttonRules.Text = "?";
+            buttonRules.UseVisualStyleBackColor = false;
+            buttonRules.Visible = false;
+            buttonRules.Click += buttonRules_Click;
+            // 
             // Yahtzee
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 645);
             Controls.Add(tableLayoutPanel2);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Yahtzee";
             Text = "Yahtzee";
             ((System.ComponentModel.ISupportInitialize)dataGridViewScore).EndInit();
@@ -226,5 +245,6 @@
         private TableLayoutPanel tableLayoutPanel1;
         private TableLayoutPanel tableLayoutPanel2;
         private Label label3;
+        private Button buttonRules;
     }
 }

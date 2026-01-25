@@ -30,6 +30,7 @@ namespace BoardGamesWinForms
             controller.StartMancalaGame();
             InitializeBoard();
             buttonStart.Visible = false;
+            buttonRules.Visible = true;
         }
 
 
@@ -90,7 +91,7 @@ namespace BoardGamesWinForms
             {
                 return;
             }
-            
+
             var game = controller.currentGame as MancalaGame;
 
             if (pit.Row == game.currentPlayer && !pit.IsStore && pit.Stones > 0)
@@ -100,7 +101,7 @@ namespace BoardGamesWinForms
 
                 //game.MakeMove(pit.Col);
                 foreach (var step in game.MakeMoveSteps(pit.Col))
-                {           
+                {
                     RedrawBoard();
                     await Task.Delay(300);
                 }
@@ -112,7 +113,7 @@ namespace BoardGamesWinForms
                 {
                     game.CollectRemaining();
                     RedrawBoard();
-                   
+
                     int winner = game.GetWinner();
                     MessageBox.Show(winner == -1 ? "Ничья" : $"Победил игрок {controller.players[winner].name}");
                 }
@@ -141,7 +142,7 @@ namespace BoardGamesWinForms
 
                 if (pit.IsStore)
                 {
-                    pit.BackColor = pit.Row == game.currentPlayer? Color.DarkOliveGreen : Color.DarkKhaki;
+                    pit.BackColor = pit.Row == game.currentPlayer ? Color.DarkOliveGreen : Color.DarkKhaki;
 
                     continue;
                 }
@@ -149,8 +150,21 @@ namespace BoardGamesWinForms
                 bool active = pit.Row == game.currentPlayer;
 
                 pit.Enabled = active;
-                pit.BackColor = active ? Color.LightBlue : Color.Bisque;
+                pit.BackColor = active ? Color.LightBlue : Color.BurlyWood;
             }
+        }
+
+        private void buttonRules_Click(object sender, EventArgs e)
+        {
+            var game = controller.currentGame;
+            var rules = game.rules;
+
+            MessageBox.Show(
+                rules.Rules,
+                rules.Name,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
         }
     }
 }

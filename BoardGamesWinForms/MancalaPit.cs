@@ -36,7 +36,7 @@ namespace BoardGamesWinForms
 
             Dock = DockStyle.Fill;
             Margin = new Padding(5);
-            BackColor = isStore ? Color.DarkKhaki : Color.Bisque;
+            BackColor = isStore ? Color.DarkKhaki : Color.BurlyWood;
 
             DoubleBuffered = true;
             Size = new Size(90, 90);

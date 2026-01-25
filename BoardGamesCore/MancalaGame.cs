@@ -15,6 +15,8 @@ namespace BoardGamesCore
         public record CellPos(int row, int column, bool store = false, int player = -1);
         private readonly List<CellPos> route;
 
+        public override IGameRules rules { get; } = new MancalaRules();
+
         public MancalaGame(List<Player> currentPlayers) : base(currentPlayers)
         {
             board = new BoardMancala(2, 7);
