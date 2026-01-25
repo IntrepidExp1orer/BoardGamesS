@@ -62,12 +62,13 @@
             // 
             buttonStart.Anchor = AnchorStyles.None;
             buttonStart.BackColor = Color.FromArgb(192, 255, 192);
+            buttonStart.Font = new Font("Stencil", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             buttonStart.ForeColor = SystemColors.ControlText;
             buttonStart.Location = new Point(358, 364);
             buttonStart.Name = "buttonStart";
             buttonStart.Size = new Size(81, 63);
             buttonStart.TabIndex = 8;
-            buttonStart.Text = "Начать";
+            buttonStart.Text = "Start";
             buttonStart.UseVisualStyleBackColor = false;
             buttonStart.Click += buttonStart_Click;
             // 
