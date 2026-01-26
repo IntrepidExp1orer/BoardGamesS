@@ -52,7 +52,5 @@ namespace BoardGamesCore
         {
             return grid[row, column].empty;
         }
-
-
     }
 }

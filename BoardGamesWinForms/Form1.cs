@@ -90,5 +90,13 @@ namespace BoardGamesWinForms
         {
             this.Close();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var cat = new CatGame();
+            cat.ShowDialog();
+            this.Show();
+        }
     }
 }
